@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { Recipe } = require("../../models");
+const { Favorite } = require("../../models");
 
-// /api/recipes
+// /api/favorites
 
 module.exports = router;
