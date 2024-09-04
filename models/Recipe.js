@@ -29,24 +29,24 @@ Recipe.init(
       tagName: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        references: {
-            model:'tag',
-            key:'id'
-        }
       },
-      ingredientUuid: {
-        type: DataTypes.INTEGER,
+      ingredients: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
         references: {
-            model:'ingredients',
-            key:'id'
-        }
-    },
-},    
+          model: 'User',
+          key: 'id',
+        },
+      }
+    }, 
     {
       sequelize,
       timestamps: false,
       freezeTableName: true,
+      underscored: true,
       modelName: 'recipe',
     }
   );
