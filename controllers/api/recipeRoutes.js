@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Recipe, User } = require("../models");
+const { Recipe, User } = require("../../models");
 
 
 // POST ROUTE /api/recipes
@@ -19,17 +19,9 @@ router.post('/', async(req, res) => {
 router.get("/", async (req, res) => {
   try {
     // Fetch all recipes from the database
-    const recipeData = await Recipe.findAll({
-  
-    });
+    const recipeData = await Recipe.findAll();
 
-
-    // Render the recipes view with the data
-    res.render("recipes", {
-      title: "All Recipes - CookMate",
-      recipes: recipeData.map(recipe => recipe.get({ plain: true })),
-      loggedIn: req.session.logged_in || false
-    });
+    res.status(200).json(recipeData);
   } catch (err) {
     console.error(err);
     res.status(500).json(err);

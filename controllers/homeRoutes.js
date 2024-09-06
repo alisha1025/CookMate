@@ -59,6 +59,16 @@ router.get('/profile', async (req, res) => {
     }
 });
 
+/* TODO: add this to any route that renders recipes
+// Render the recipes view with the data
+res.render("recipes", {
+    title: "All Recipes - CookMate",
+    recipes: recipeData.map(recipe => recipe.get({ plain: true })),
+    loggedIn: req.session.logged_in || false
+});
+*/
+
+
 // Route to handle logout
 router.get('/logout', (req, res) => {
     req.session.destroy(() => {
