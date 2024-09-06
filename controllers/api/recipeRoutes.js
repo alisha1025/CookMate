@@ -1,6 +1,20 @@
 const router = require("express").Router();
 const { Recipe, User } = require("../models");
 
+
+// POST ROUTE /api/recipes
+router.post('/', async(req, res) => {
+    try {
+        const newRecipe = await Recipe.create({
+            ...req.body,
+            user_id: req.session.user_id,
+        })
+    res.status(200).json(newRecipe); 
+    } catch (err) {
+        res.status(400).json(err);
+    }
+})
+
 // Route to get all recipes
 router.get("/", async (req, res) => {
   try {
@@ -8,6 +22,7 @@ router.get("/", async (req, res) => {
     const recipeData = await Recipe.findAll({
   
     });
+
 
     // Render the recipes view with the data
     res.render("recipes", {
