@@ -13,14 +13,16 @@ Recipe.belongsTo(User, {
   foreignKey: "user_id",
 });
 
-User.hasMany(Favorite, {
+User.belongsToMany(Recipe, {
+  through: Favorite,
   foreignKey: "user_id",
   onDelete: "CASCADE",
 });
 
 // Creates a relationship between User and Project model, with a "belongs to" relationship of the Project to the User.
-Favorite.belongsTo(User, {
-  foreignKey: "user_id",
+Recipe.belongsToMany(User, {
+  through: Favorite,
+  foreignKey: "recipe_id",
 });
 
 module.exports = { User, Recipe, Favorite };
