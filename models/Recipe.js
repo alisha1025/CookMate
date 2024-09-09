@@ -23,12 +23,8 @@ Recipe.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    tagName: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
     ingredients: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     user_id: {

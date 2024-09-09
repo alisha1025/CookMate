@@ -32,6 +32,46 @@ router.get("/contact", (req, res) => {
   res.render("contact", { title: "Contact Us - CookMate" });
 });
 
+// redner add page
+router.get("/add", async (req, res) => {
+    try {
+        const recipeData = await Recipe.findAll({
+          include: [
+            {
+              model: User,
+              attributes: ["username"],
+            },
+          ],
+        });
+    
+        // serialize the data
+        const recipes = recipeData.map((recipe) => recipe.get({ plain: true }));
+    
+        res.render("add", {
+          recipes,
+          logged_in: req.session.logged_in,
+        });
+      } catch (err) {
+        res.status(500).json(err);
+      }
+});
+
+// render recipes page
+router.get("/recipes", (req, res) => {
+    res.render("recipes");
+});
+  
+
+router.get("/signup", async (req, res) => {
+    res.render("signup")
+});
+
+
+router.get("/login", async (req, res) => {
+    res.render("login");
+});
+
+
 // Route to render the user profile page
 router.get("/profile", async (req, res) => {
   try {
@@ -69,6 +109,7 @@ res.render("recipes", {
     loggedIn: req.session.logged_in || false
 });
 */
+
 
 
 // Route to handle logout
