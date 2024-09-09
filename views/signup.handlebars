@@ -1,21 +1,18 @@
 <div class="container bg-white p-4 rounded-lg shadow-lg max-w-md mx-auto">
   <h1 class="text-center text-xl font-bold mb-3 text-gray-800">Sign Up</h1>
-  <form action="/register" method="POST" class="space-y-3">
+  <form method="POST" class="space-y-3" id="signupForm">
     <div class="form-group">
       <label for="username" class="block text-gray-700">Username</label>
-      <input type="text" id="username" name="username" required class="w-full p-1.5 border border-gray-300 rounded" />
+      <input type="text" id="signupUsername" name="username" required class="w-full p-1.5 border border-gray-300 rounded" />
     </div>
     <div class="form-group">
       <label for="password" class="block text-gray-700">Password</label>
-      <input type="password" id="password" name="password" required class="w-full p-1.5 border border-gray-300 rounded" />
+      <input type="password" id="signupPassword" name="password" required class="w-full p-1.5 border border-gray-300 rounded" />
     </div>
     <div class="form-group">
       <button type="submit" class="w-full bg-green-500 text-white py-1.5 rounded hover:bg-green-600 transition">Sign Up</button>
     </div>
   </form>
-  <p class="signup-link text-center mt-3 text-gray-600">Already have an account? 
-    <a href="/login" class="text-blue-500 hover:underline">Login here</a>
-  </p>
 </div>
 
 <script src="./js/signup.js"></script>
