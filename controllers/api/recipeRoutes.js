@@ -3,7 +3,7 @@ const { Recipe, User } = require("../../models");
 
 
 // POST ROUTE /api/recipes
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     try {
         const newRecipe = await Recipe.create({
             ...req.body,
