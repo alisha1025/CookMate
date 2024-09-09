@@ -19,11 +19,9 @@ router.get("/", async (req, res) => {
   try {
     // Fetch all recipes from the database
 
-    const recipeData = await Recipe.findAll({
-  
-
-      res.status(200).json(recipeData);
-    } catch (err) {
+    const recipeData = await Recipe.findAll();
+    res.status(200).json(recipeData);
+  } catch (err) {
       console.error(err);
       res.status(500).json(err);
     }
