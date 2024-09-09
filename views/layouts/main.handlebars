@@ -18,13 +18,19 @@
                 <a href="/" class="text-xl font-bold">CookMate</a>
             </div>
             <div>
+              {{#if logged_in}}
                 <ul class="flex space-x-4">
                     <li><a href="/" class="border border-2 border-slate-50 rounded">Home</a></li>
-                    <li><a href="/recipes" class="border border-2 border-slate-50 rounded">Recipes</a></li>
                     <li><a href="/add" class="border border-2 border-slate-50 rounded">Add</a></li>
-                    <li><a href="/login" class="border border-2 border-slate-50 rounded">Login</a></li>
-                   
+                    <li><a href="/logout" class="border border-2 border-slate-50 rounded">Logout</a></li>
                 </ul>
+              {{else}}
+              <ul class="flex space-x-4">
+                    <li><a href="/" class="border border-2 border-slate-50 rounded">Home</a></li>
+                    <li><a href="/login" class="border border-2 border-slate-50 rounded">Add</a></li>
+                    <li><a href="/login" class="border border-2 border-slate-50 rounded">Login</a></li>
+              </ul>
+              {{/if}}
             </div>
         </nav>
     </header>

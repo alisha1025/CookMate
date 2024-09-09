@@ -3,21 +3,18 @@
       "recipeName": "Spaghetti Bolognese",
       "photo": "https://www.recipetineats.com/tachyon/2018/07/Spaghetti-Bolognese.jpg",
       "instructions": "Cook spaghetti. Prepare the sauce with minced meat, tomatoes, and garlic. Mix together and serve.",
-      "tagName": 1,
       "ingredients": ["spaghetti", "minced meat", "tomatoes", "garlic", "onions", "olive oil"]
     },
     {
       "recipeName": "Vegetable Stir Fry",
       "photo": "https://therecipecritic.com/wp-content/uploads/2019/08/vegetable_stir_fry.jpg",
-      "instructions": "Stir fry vegetables in a hot pan with soy sauce and sesame oil. Serve with rice.",
-      "tagName": 2,  
+      "instructions": "Stir fry vegetables in a hot pan with soy sauce and sesame oil. Serve with rice.", 
       "ingredients": ["broccoli", "carrots", "peppers", "soy sauce", "sesame oil", "rice"]
     },
     {
       "recipeName": "Chicken Tikka Masala",
       "photo": "https://www.skinnytaste.com/wp-content/uploads/2011/06/Chicken-Tikka-Masala-15.jpg",
-      "instructions": "Cook chicken with tikka masala sauce. Serve with naan bread and rice.",
-      "tagName": 3,  
+      "instructions": "Cook chicken with tikka masala sauce. Serve with naan bread and rice.",  
       "ingredients": ["chicken", "tikka masala sauce", "naan bread", "rice"]
     }
 ]
