@@ -18,9 +18,9 @@ const loginHandler = async (event) => {
     if (response.ok) {
       console.log("logged in");
       // relocate to homepage
-      document.location.replace('/add');
+      document.location.replace("/add");
     } else {
-      alert(response.statusText);
+      alert("Username or password incorrect");
     }
   }
 };
