@@ -7,6 +7,10 @@ router.get("/", async (req, res) => {
     // Fetch recent recipes for the home page
     const recipes = await Recipe.findAll({
       limit: 10, // Adjust as needed
+      include: [{
+        model: User,
+        attributes: ['username']
+      }]
       //   order: [["createdAt", "DESC"]],
     });
 
@@ -14,7 +18,7 @@ router.get("/", async (req, res) => {
     res.render("homepage", {
       title: "Home - CookMate",
       recipes: recipes.map((recipe) => recipe.get({ plain: true })),
-      loggedIn: req.session.loggedIn || false, // Check if the user is logged in
+      logged_in: req.session.logged_in || false, // Check if the user is logged in
     });
   } catch (err) {
     console.error(err);
@@ -35,25 +39,26 @@ router.get("/contact", (req, res) => {
 // redner add page
 router.get("/add", async (req, res) => {
     try {
-        const recipeData = await Recipe.findAll({
-          include: [
-            {
-              model: User,
-              attributes: ["username"],
-            },
-          ],
-        });
-    
-        // serialize the data
-        const recipes = recipeData.map((recipe) => recipe.get({ plain: true }));
-    
-        res.render("add", {
-          recipes,
-          logged_in: req.session.logged_in,
-        });
-      } catch (err) {
+        if (req.session.logged_in) {
+            const recipeData = await Recipe.findAll({
+                where: { user_id: req.session.user_id },
+                include: [{
+                  model: User,
+                  attributes: ['username']
+                }]
+            });
+            // serialize the data
+            const recipes = recipeData.map((recipe) => recipe.get({ plain: true }));
+            res.render("add", {
+                logged_in: req.session.logged_in,
+                recipes: recipes,
+            });
+        } else {
+            res.redirect("/login");
+        }
+    } catch (err) {
         res.status(500).json(err);
-      }
+    }
 });
 
 // render recipes page
@@ -93,7 +98,7 @@ router.get("/profile", async (req, res) => {
       favorites: user.favorites.map((favorite) =>
         favorite.get({ plain: true })
       ),
-      loggedIn: true,
+      logged_in: true,
     });
   } catch (err) {
     console.error(err);
