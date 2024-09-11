@@ -16,7 +16,7 @@ const signupHandler = async (event) => {
       // relocate user to homepage
       document.location.replace("/add");
     } else {
-      alert(response.statusText);
+      alert("Username taken");
     }
   }
 };

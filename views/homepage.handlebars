@@ -32,7 +32,7 @@
             
         <!-- Add to Favorites Button -->
           <button 
-            class="favorite-button bg-blue-500 text-white px-4 py-2 rounded mt-4" 
+            class="favorite-button bg-green-500 text-white px-4 py-2 rounded mt-4" 
             data-recipe-id="{{recipe.id}}"
             data-user-id="{{User.id}}">
             Add to Favorites
@@ -43,5 +43,33 @@
   </div>
 </div>
 
-<!-- Link to your JavaScript file -->
-<script src="/js/favorites.js"></script>
+<script>
+  const userId = '{{user_id}}';
+
+  const addToFavorites = async (recipeId) => {
+    try {
+      const response = await fetch(`/api/favorites/users/${userId}/recipes/${recipeId}/add`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      if (response.ok) {
+        console.log('Recipe added to favorites');
+        
+      } else {
+        console.error('Failed to add recipe to favorites');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+};
+  
+
+$('.favorite-button').on('click', (event) => {
+  const recipeId = event.target.getAttribute('data-recipe-id');
+  console.log(recipeId);
+  addToFavorites(recipeId);
+});
+</script>
