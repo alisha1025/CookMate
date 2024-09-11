@@ -25,4 +25,14 @@ Recipe.belongsToMany(User, {
   foreignKey: "recipe_id",
 });
 
+// Favorite belongs to User
+Favorite.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+// Favorite belongs to Recipe
+Favorite.belongsTo(Recipe, {
+  foreignKey: "recipe_id",
+});
+
 module.exports = { User, Recipe, Favorite };

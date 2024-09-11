@@ -58,11 +58,14 @@ router.post("/users/:userId/recipes/:recipeId/add", async (req, res) => {
     }
 
     // Add the recipe to the user's favorites through the Favorite junction table
-    await user.addRecipe(recipe);
+    const favorite = await Favorite.create({
+      user_id: userId,
+      recipe_id: recipeId,
+    });
 
     return res
       .status(200)
-      .json({ message: "Recipe added to favorites successfully" });
+      .json({ message: "Recipe added to favorites successfully", favorite });
   } catch (err) {
     return res
       .status(500)

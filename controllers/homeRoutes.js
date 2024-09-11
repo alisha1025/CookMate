@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
       limit: 10, // Adjust as needed
       include: [{
         model: User,
-        attributes: ['username']
+        attributes: ['id', 'username']
       }]
       //   order: [["createdAt", "DESC"]],
     });
@@ -19,6 +19,7 @@ router.get("/", async (req, res) => {
       title: "Home - CookMate",
       recipes: recipes.map((recipe) => recipe.get({ plain: true })),
       logged_in: req.session.logged_in || false, // Check if the user is logged in
+      user_id: req.session.user_id || null
     });
   } catch (err) {
     console.error(err);
@@ -77,32 +78,33 @@ router.get("/login", async (req, res) => {
 });
 
 
-// Route to render the user profile page
+// redner add page
 router.get("/profile", async (req, res) => {
   try {
-    if (!req.session.user_id) {
-      return res.redirect("/login");
-    }
+      if (req.session.logged_in) {
+          const userData = await User.findByPk(req.session.user_id);
+          const userName = userData.username;
 
-    const user = await User.findByPk(req.session.user_id, {
-      include: [
-        { model: Recipe, as: "recipes" },
-        { model: Favorite, as: "favorites", include: [{ model: Recipe }] },
-      ],
-    });
-
-    res.render("profile", {
-      title: "Your Profile - CookMate",
-      user: user.get({ plain: true }),
-      recipes: user.recipes.map((recipe) => recipe.get({ plain: true })),
-      favorites: user.favorites.map((favorite) =>
-        favorite.get({ plain: true })
-      ),
-      logged_in: true,
-    });
+          const favoriteData = await Favorite.findAll({
+              where: { user_id: req.session.user_id },
+              include: [{
+                model: Recipe,
+                include: [{ model: User, attributes: ['username'] }]
+            }]
+          });
+          
+          // serialize the data
+          const favorites = favoriteData.map((favorite) => favorite.get({ plain: true }));
+          res.render("profile", {
+              logged_in: req.session.logged_in,
+              favorites: favorites,
+              userName: userName
+          });
+      } else {
+          res.redirect("/login");
+      }
   } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
+      res.status(500).json(err);
   }
 });
 
