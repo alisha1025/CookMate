@@ -29,8 +29,19 @@
             <p class="text-gray-600 break-words">{{recipe.ingredients}}</p>
             <p class="text-gray-600 font-semibold mt-2">Instructions:</p>
             <p class="text-gray-600 break-words">{{recipe.instructions}}</p>
-          </div>
-        {{/each}}
-      </div>
+            
+        <!-- Add to Favorites Button -->
+          <button 
+            class="favorite-button bg-blue-500 text-white px-4 py-2 rounded mt-4" 
+            data-recipe-id="{{recipe.id}}"
+            data-user-id="{{User.id}}">
+            Add to Favorites
+          </button>
+        </div>
+      {{/each}}
     </div>
   </div>
+</div>
+
+<!-- Link to your JavaScript file -->
+<script src="/js/favorites.js"></script>
