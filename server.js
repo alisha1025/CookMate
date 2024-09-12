@@ -38,6 +38,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(routes);
 
 // leaving force on true will clear table data each time server starts
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
 });
